@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <link rel="stylesheet" href="styles.css">  
+</head>
+<body>
+    <section id="contenedor">
+        <div class="containerpy-2">
+            <p class="lead">INGRESE USUARIOS</p>
+            <form class="form">
+                <input id="nombre" type="text" placeholder="INGRESE NOMBRE" autocomplete="off" class="form-control my-2">
+                <input id="apellido" type="text" placeholder="INGRESE APELLIDO" autocomplete="off" class="form-control my-2">
+                <button id="boton" class="btn btn-sucess" type="reset" onclick="capturar();">AGREGAR </button>
+            </form>
+        </div>
+        <div class="container">
+            <table class="table" id="tabla">
+                <thead class="tead-inverse">
+                  <tr>
+                    <th>NOMBRE</th>
+                    <th>EDAD</th>
+                  </tr>  
+                </thead>
+            </table>
+        </div>
+        <div class="parrafos">
+            <div class="botones">
+                <button id="ordNombre" onclick="ordenarNombre();">ORDENAR NOMBRES</button>   
+                <button id="ordApellido" onclick="ordenarApellido();">ORDENAR APELLIDOS</button>   
+            </div>        
+            <div class="resultados">
+                <P>MATRIZ 1</P><p id="respuesta1">0</p>
+                <P>MATRIZ 2</P><p id="respuesta2">0</p> 
+            </div>
+            <button id="reiniciar" onclick="reinicar();">REINICAR</button>
+             
+        </div>
+    </section>
+   
+   <script>
+function capturar(){
+
+function Personal(nombre,apellido){
+this.nombre = nombre;
+this.apellido = apellido;
+}
+
+let capturarnombre = document.getElementById("nombre").value;
+let capturarapellido = document.getElementById("apellido").value;
+
+NuevoPersonal = new Personal(capturarnombre,capturarapellido);
+agregar();
+}
+
+var base = [];
+function agregar(){
+    base.push(NuevoPersonal);
+    document.getElementById("tabla").innerHTML += "<tbody><td>"+NuevoPersonal.nombre+"</td><td>"+NuevoPersonal.apellido+"</td></tbody>";
+
+}
+var pruebaNombres=[];
+var pruebaApellidos=[]; 
+function ordenarNombre(){  
+    pruebaNombres=[];
+    pruebaApellidos=[];  
+
+    base.sort((a,b) => {
+        if(a.nombre < b.nombre ){
+            return -1;
+        }   
+        if(a.nombre > b.nombre){
+            return 1;
+        }
+        return 0 ;
+    });
+   
+    let respuesta1 = document.getElementById("respuesta1")
+    let respuesta2 = document.getElementById("respuesta2")
+    for (let x=0; x<base.length; x++)
+    {
+        pruebaNombres.push(base[x].nombre);
+        pruebaApellidos.push(base[x].apellido);      
+    }
+
+    respuesta1.innerHTML = pruebaNombres;
+    respuesta2.innerHTML = pruebaApellidos;    
+    console.log(pruebaApellidos)
+    console.log(pruebaNombres)
+}
+
+function ordenarApellido(){
+
+    pruebaNombres=[];
+    pruebaApellidos=[];
+   
+   base.sort((a,b) => {
+       if(a.apellido < b.apellido ){
+           return -1;
+       }   
+       if(a.apellido > b.apellido){
+           return 1;
+       }
+       return 0 ;
+   });
+  
+   var respuesta1 = document.getElementById("respuesta1")
+   var respuesta2 = document.getElementById("respuesta2")
+   for (let x=0; x<base.length; x++)
+   {
+       pruebaNombres.push(base[x].nombre);
+       pruebaApellidos.push(base[x].apellido);      
+   }
+
+   respuesta1.innerHTML = pruebaApellidos;
+   respuesta2.innerHTML = pruebaNombres;    
+    console.log(pruebaApellidos)
+    console.log(pruebaNombres)
+}
+
+function reinicar(){
+   location.reload()
+}
+
+   </script>
+</body>
+</html>
